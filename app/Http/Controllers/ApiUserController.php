@@ -108,7 +108,6 @@ class ApiUserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-
         $foto = null;
 
         if ($request->foto) {
@@ -126,12 +125,11 @@ class ApiUserController extends Controller
             $foto = $array->image->file->resource->chain->image;
         }
 
+        // $data = $request->all();
+        $data = $request->all(['name', 'foto', 'alamat']);
+        $filter = array_filter($data);
 
-        $user = User::find(Auth::id())->update([
-            'name' => $request->name,
-            'alamat' => $request->alamat,
-            'foto' => $foto,
-        ]);
+        $user = User::find(Auth::id())->update($filter);
 
         if (empty($user)) {
             return response()->json([
