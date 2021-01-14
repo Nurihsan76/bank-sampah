@@ -108,7 +108,9 @@ class ApiUserController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $foto = null;
+        $data = $request->all(['name', 'foto', 'alamat']);
+        $filter = array_filter($data);
+        $user = User::find(Auth::id())->update($filter);
 
         if ($request->foto) {
             $img = base64_encode(file_get_contents($request->foto));
@@ -123,13 +125,9 @@ class ApiUserController extends Controller
             ]);
             $array = json_decode($res->getBody()->getContents());
             $foto = $array->image->file->resource->chain->image;
+
+            $user = User::find(Auth::id())->update(['foto' => $foto]);
         }
-
-        // $data = $request->all();
-        $data = $request->all(['name', 'foto', 'alamat']);
-        $filter = array_filter($data);
-
-        $user = User::find(Auth::id())->update($filter);
 
         if (empty($user)) {
             return response()->json([
