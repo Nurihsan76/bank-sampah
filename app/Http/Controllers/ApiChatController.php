@@ -77,7 +77,7 @@ class ApiChatController extends Controller
             $query->where('from', Auth::id())->where('to', $id);
         })->orWhere(function ($query) use ($id) {
             $query->where('from', $id)->where('to', Auth::id());
-        })->get();
+        })->orderBy('id')->get();
 
         // $pesan = null;
 
