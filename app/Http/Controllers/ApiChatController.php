@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Pusher\Pusher;
 
 class ApiChatController extends Controller
 {
@@ -113,12 +114,26 @@ class ApiChatController extends Controller
         }
 
         $form = $validator->validated();
-        $pesan = Chat::create([
+        $data = Chat::create([
             'from' => Auth::id(),
             'to' => $id,
             'pesan' => $form['pesan'],
             'status' => 1
         ]);
+
+        $options = array(
+            'cluster' => 'ap1',
+            'useTLS' => true
+        );
+        $pusher = new Pusher(
+            '17384868cdc7bd11afa9',
+            'c2a1e09d05c516aad88a',
+            '1138599',
+            $options
+        );
+
+        // $data = $pesan;
+        $pusher->trigger('my-channel', 'my-event', $data);
 
         if (empty($pesan)) {
             return response()->json([
@@ -130,7 +145,7 @@ class ApiChatController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'data tersedia',
-            'data' => $pesan
+            'data' => $data
         ]);
     }
 }
