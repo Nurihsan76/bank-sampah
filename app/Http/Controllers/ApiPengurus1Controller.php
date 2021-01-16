@@ -101,7 +101,11 @@ class ApiPengurus1Controller extends Controller
     }
     public function detailDataJemput($id)
     {
-        $data = Penjemputan::where('penjemput_id', Auth::id())->where('id', $id)->first();
+        // $data = Penjemputan::where('penjemput_id', Auth::id())->where('id', $id)->with('user')->first();
+        $user = Penjemputan::where('penjemput_id', Auth::id())->where('id', $id)->get();
+        $data = PenjemputanResource::collection($user);
+        $data = $data->sortByDesc('created_at');
+        $data = $data->values()->all();
 
         if (empty($data)) {
             return response()->json([
