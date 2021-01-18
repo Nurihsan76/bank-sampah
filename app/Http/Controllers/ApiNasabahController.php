@@ -11,6 +11,7 @@ use App\JenisSampah;
 use App\Penjemputan;
 use App\Tabungan;
 use App\User;
+use Carbon\Carbon;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -202,6 +203,8 @@ class ApiNasabahController extends Controller
             'to' => $request->penjemput_id,
             'status' => 1,
             'pesan' => 'Saya Telah Mengirim Form Penjemputan, Mohon Segera Dijemput',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         if (empty($penjemput)) {

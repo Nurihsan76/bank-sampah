@@ -10,6 +10,7 @@ use App\JenisSampah;
 use App\Penjemputan;
 use App\Tabungan;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -132,6 +133,8 @@ class ApiPengurus1Controller extends Controller
             'to' => $user->user_id,
             'status' => 1,
             'pesan' => 'Baik, Penjemputan Akan Segera kami Lakukan',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         return response()->json([
@@ -154,6 +157,8 @@ class ApiPengurus1Controller extends Controller
             'to' => $user->user_id,
             'status' => 1,
             'pesan' => 'Maaf, Pemintaan Anda Tidak Bisa Kami Lakukan',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         if (empty($user)) {
