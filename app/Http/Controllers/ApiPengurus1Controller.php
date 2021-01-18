@@ -172,7 +172,7 @@ class ApiPengurus1Controller extends Controller
         ], 200);
     }
 
-    public function selelsaiJemput($id)
+    public function selesaiJemput($id)
     {
         $user = Penjemputan::where('id', $id)->first();
         $user->status = 4;
