@@ -64,5 +64,5 @@ Route::get('pengurus1/jenissampah', 'ApiPengurus1Controller@jenisSampah')->middl
 // pengurus2
 Route::get('pengurus2', 'ApiPengurus2Controller@index')->middleware('jwt.verify');
 Route::get('pengurus2/riwayatpenjualan', 'ApiPengurus2Controller@riwayatPenjualan')->middleware('jwt.verify');
-Route::get('pengurus2/riwayatpnjualana/{id}', 'ApiPengurus2Controller@detailRiwayatPenjualan')->middleware('jwt.verify');
+Route::get('pengurus2/riwayatpnjualan/{id}', 'ApiPengurus2Controller@detailRiwayatPenjualan')->middleware('jwt.verify');
 Route::post('pengurus2/penjualan', 'ApiPengurus2Controller@penjualan')->middleware('jwt.verify');

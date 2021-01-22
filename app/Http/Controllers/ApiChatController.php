@@ -135,7 +135,7 @@ class ApiChatController extends Controller
         // $data = $pesan;
         $pusher->trigger('my-channel', 'my-event', $data);
 
-        if (empty($pesan)) {
+        if (empty($data)) {
             return response()->json([
                 'status' => 'failed',
                 'message' => 'data tidak tersedia',
