@@ -18,8 +18,8 @@ class Chat extends Model
     public function getUpdatedAtAttribute()
     {
         return Carbon::parse($this->attributes['updated_at'])
-        //    ->diffForHumans();
-        ->format('d-M-Y');
+           ->diffForHumans();
+        // ->format('d-M-Y');
 
     }
 }
