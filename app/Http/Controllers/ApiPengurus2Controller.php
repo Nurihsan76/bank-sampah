@@ -93,7 +93,7 @@ class ApiPengurus2Controller extends Controller
 
     public function riwayatPenjualan()
     {
-        $penjualan = Penjualan::get();
+        $penjualan = Penjualan::orderBy('id', 'desc')->get();
 
         if(empty($penjualan)){
             return response()->json([
