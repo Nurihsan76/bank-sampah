@@ -27,6 +27,7 @@ class PenjemputanResource extends JsonResource
             'alamat_penjemput' => $this->penjemput->alamat,
             'telpon_penjemput' => $this->penjemput->telpon,
             'foto_penjemput' => $this->penjemput->foto,
+            'user_id' => $this->user->id,
             'user_nama' => $this->user->name,
             'user_email' => $this->user->email,
             'user_telpon' => $this->user->telpon,
