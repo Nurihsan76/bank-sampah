@@ -34,16 +34,16 @@ class ApiChatController extends Controller
     public function kontakPengurus1()
     {
         $from = DB::table('users')
-            ->join('pesan', 'users.id', '=', 'pesan.from')
+            ->join('chats', 'users.id', '=', 'chats.from')
             ->where('users.id', '!=', Auth::id())
-            ->where('pesan.to', '=', Auth::id())
+            ->where('chats.to', '=', Auth::id())
             ->select('users.id', 'users.name', 'users.foto')
             ->distinct()->get()->toArray();
 
         $to = DB::table('users')
-            ->join('pesan', 'users.id', '=', 'pesan.to')
+            ->join('chats', 'users.id', '=', 'chats.to')
             ->where('users.id', '!=', Auth::id())
-            ->where('pesan.from', '=', Auth::id())
+            ->where('chats.from', '=', Auth::id())
             ->select('users.id', 'users.name', 'users.foto')
             ->distinct()->get()->toArray();
 
