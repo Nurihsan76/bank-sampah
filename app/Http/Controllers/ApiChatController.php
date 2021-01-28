@@ -37,14 +37,14 @@ class ApiChatController extends Controller
             ->join('chats', 'users.id', '=', 'chats.from')
             ->where('users.id', '!=', Auth::id())
             ->where('chats.to', '=', Auth::id())
-            ->select('users.id', 'users.name', 'users.foto')
+            ->select('users.id', 'users.name', 'users.email', 'users.foto')
             ->distinct()->get()->toArray();
 
         $to = DB::table('users')
             ->join('chats', 'users.id', '=', 'chats.to')
             ->where('users.id', '!=', Auth::id())
             ->where('chats.from', '=', Auth::id())
-            ->select('users.id', 'users.name', 'users.foto')
+            ->select('users.id', 'users.name', 'users.email', 'users.foto')
             ->distinct()->get()->toArray();
 
         $kontak = array_unique(array_merge($from, $to), SORT_REGULAR);;
